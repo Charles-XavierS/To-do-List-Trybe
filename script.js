@@ -1,13 +1,27 @@
-const buttonAdd = document.getElementById('criar-tarefa');
-const inputSpace = document.getElementById('texto-tarefa');
-const toDoList = document.getElementById('lista-tarefas');
+// Adiciona itens a lista, adiciona classe aos itens criados e limpa o valor do input, após clicar no botão
+
+const buttonAdd = document.querySelector('#criar-tarefa');
+const inputSpace = document.querySelector('#texto-tarefa');
+const toDoList = document.querySelector('#lista-tarefas');
 
 function addItem() {
-  const li = document.createElement('li');
-  li.classList.add('itens-list');
-  li.innerHTML = inputSpace.value;
-  toDoList.appendChild(li);
+  const newLi = document.createElement('li');
+  newLi.innerHTML = inputSpace.value;
+  toDoList.appendChild(newLi);
   inputSpace.value = '';
 }
-
 buttonAdd.addEventListener('click', addItem);
+
+// Mudar background ao clicar nos itens
+
+const lis = document.getElementsByTagName('li');
+
+function selectedItem(event) {
+  if (!event.target.classList.contains('list')) {
+    for (const li of lis) {
+      li.classList.remove('selected');
+      event.target.classList.add('selected');
+    }
+  }
+}
+toDoList.addEventListener('click', selectedItem);
