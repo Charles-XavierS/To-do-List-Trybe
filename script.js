@@ -25,3 +25,32 @@ function selectedItem(event) {
   }
 }
 toDoList.addEventListener('click', selectedItem);
+
+// Marcar os itens como riscados ao clicar duas vezeas
+
+function lineThrough(event) {
+  event.target.classList.toggle('completed');
+}
+toDoList.addEventListener('dblclick', lineThrough);
+
+// Botão apagar tudo
+
+const clearButton = document.getElementById('apaga-tudo');
+
+function clearList() {
+  toDoList.innerHTML = '';
+}
+clearButton.addEventListener('click', clearList);
+
+// Botão remover finalizado
+// Source: https://stackoverflow.com/questions/4777077/removing-elements-by-class-name
+
+const finishedButton = document.getElementById('remover-finalizados');
+const finishedTask = document.getElementsByClassName('completed');
+
+function finishedTasks() {
+  while (finishedTask.length > 0) {
+    finishedTask[0].parentNode.removeChild(finishedTask[0]);
+  }
+}
+finishedButton.addEventListener('click', finishedTasks);
